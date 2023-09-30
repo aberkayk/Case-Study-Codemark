@@ -9,7 +9,7 @@ import {
   toggleTodoModal,
 } from "../../redux/features/todo/todo-slice";
 
-const TodoCreate = () => {
+const CreateTodoButton = () => {
   const todoModal = useAppSelector(selectTodoModal);
   const dispatch = useAppDispatch();
   const initialData = useAppSelector((state) =>
@@ -37,4 +37,4 @@ const TodoCreate = () => {
   );
 };
 
-export default TodoCreate;
+export default CreateTodoButton;

@@ -6,7 +6,7 @@ import { DataTable } from "../components/ui/data-table";
 import { useTodos } from "../hooks/use-todos";
 import { Todo } from "../types";
 import TodoFilter from "../components/todo/todo-filter";
-import TodoCreate from "../components/todo/todo-create";
+import TodoCreate from "../components/todo/create-todo-button";
 import EditTodoButton from "../components/todo/edit-todo-button";
 import { Checkbox } from "../components/ui/checkbox";
 import TodoActions from "../components/todo/todo-actions";

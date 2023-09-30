@@ -13,7 +13,7 @@ interface Props {
   table: Table<Todo>;
 }
 
-const DeleteAllTodosButton = ({ ids, table }: Props) => {
+const DeleteTodoByIdsButton = ({ ids, table }: Props) => {
   const dispatch = useAppDispatch();
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -55,4 +55,4 @@ const DeleteAllTodosButton = ({ ids, table }: Props) => {
   );
 };
 
-export default DeleteAllTodosButton;
+export default DeleteTodoByIdsButton;

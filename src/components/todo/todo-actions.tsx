@@ -1,6 +1,6 @@
 import { Table } from "@tanstack/react-table";
 import { Todo } from "../../types";
-import DeleteAllTodosButton from "./delete-all-todos-button";
+import DeleteTodoByIdsButton from "./delete-todo-by-ids-button.tsx";
 
 interface Props {
   table: Table<Todo>;
@@ -14,7 +14,7 @@ const TodoActions = ({ table }: Props) => {
   return (
     <div>
       {selectedIds.length > 0 && (
-        <DeleteAllTodosButton ids={selectedIds} table={table} />
+        <DeleteTodoByIdsButton ids={selectedIds} table={table} />
       )}
     </div>
   );
