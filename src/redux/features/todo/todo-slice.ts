@@ -1,12 +1,11 @@
+import { RootState } from "../../app/store";
+import { Todo } from "../../../types";
 import {
   createSlice,
   createSelector,
   createEntityAdapter,
-  PayloadAction,
   EntityState,
 } from "@reduxjs/toolkit";
-import { RootState } from "../../app/store";
-import { Todo } from "../../../types";
 import {
   deleteTodo,
   getTodos,

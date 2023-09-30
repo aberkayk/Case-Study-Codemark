@@ -30,7 +30,7 @@ const columns: ColumnDef<Todo>[] = [
   },
   {
     accessorKey: "completed",
-    header: "Is Done",
+    header: "Is Completed",
     cell: ({ row }) => {
       return (
         <TodoCompletedField

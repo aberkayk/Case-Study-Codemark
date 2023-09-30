@@ -6,6 +6,11 @@ import TodosPage from "../pages/todos-page";
 import UsersPage from "../pages/users-page";
 import ProtectedRoute from "./protected-route";
 
+export const routes = [
+  { path: "/todos", label: "Todos" },
+  { path: "/users", label: "Users" },
+];
+
 export const router = createBrowserRouter([
   {
     path: "/login",
@@ -20,11 +25,8 @@ export const router = createBrowserRouter([
       </ProtectedRoute>
     ),
     errorElement: <ErrorPage />,
-    // loader: rootLoader,
-    // action: rootAction,
     children: [
       {
-        errorElement: <ErrorPage />,
         children: [
           // Resources
           {

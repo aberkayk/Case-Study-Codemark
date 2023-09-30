@@ -2,7 +2,7 @@ import { Table } from "@tanstack/react-table";
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
-  filter?: any;
+  filter: ({ table }: { table: Table<TData> }) => JSX.Element;
 }
 
 export function DataTableToolbar<TData>({

@@ -1,6 +1,7 @@
 import { Table } from "@tanstack/react-table";
 import { XIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { completeOptions } from "../../constants/data";
 import { useTodos } from "../../hooks/use-todos";
 import { useUsers } from "../../hooks/use-users";
 import { useAppDispatch } from "../../redux/app/hooks";
@@ -52,6 +53,35 @@ const TodoFilter = ({ table }: Props) => {
           onChange={onUserChange}
           selectedValue={userId}
           onReset={onReset}
+          selectedLabel={
+            userId
+              ? userOptions.find((item) => item.value === userId)?.label
+              : ""
+          }
+        />
+      )}
+      {table.getColumn("completed") && (
+        <DataTableFacetedFilter
+          title="Is Completed"
+          options={completeOptions}
+          onChange={(value: any) => {
+            table.getColumn("completed")?.setFilterValue(value);
+          }}
+          selectedValue={
+            table.getColumn("completed")?.getFilterValue() as string
+          }
+          selectedLabel={
+            table.getColumn("completed")?.getFilterValue()
+              ? completeOptions.find(
+                  (item) =>
+                    item.value ===
+                    table.getColumn("completed")?.getFilterValue()
+                )?.label
+              : ""
+          }
+          onReset={() =>
+            table.getColumn("completed")?.setFilterValue(undefined)
+          }
         />
       )}
       {isFiltered && (

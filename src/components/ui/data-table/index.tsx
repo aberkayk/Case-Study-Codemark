@@ -1,3 +1,14 @@
+import React from "react";
+import { Button } from "../button";
+import { DataTableToolbar } from "./data-table-toolbar";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "../table";
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -10,23 +21,11 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import React, { ReactElement } from "react";
-import { Button } from "../button";
-import { Input } from "../input";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "../table";
-import { DataTableToolbar } from "./data-table-toolbar";
 
 interface Props<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-  filter?: any;
+  filter: ({ table }: { table: any }) => JSX.Element;
 }
 
 export function DataTable<TData, TValue>({

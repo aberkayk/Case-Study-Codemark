@@ -10,10 +10,10 @@ const UserFilter = ({ table }: Props) => {
   return (
     <>
       <Input
-        placeholder="Filter lastname..."
-        value={(table.getColumn("lastName")?.getFilterValue() as string) ?? ""}
+        placeholder="Search name..."
+        value={table.getColumn("firstName")?.getFilterValue() as string}
         onChange={(event) =>
-          table.getColumn("lastName")?.setFilterValue(event.target.value)
+          table.getColumn("firstName")?.setFilterValue(event.target.value)
         }
         className="h-8 w-[150px] lg:w-[250px]"
       />

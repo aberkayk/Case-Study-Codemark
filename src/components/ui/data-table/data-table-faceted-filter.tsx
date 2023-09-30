@@ -19,12 +19,13 @@ interface DataTableFacetedFilterProps {
   title?: string;
   options: {
     label: string;
-    value: string;
+    value: any;
     icon?: React.ComponentType<{ className?: string }>;
   }[];
   onChange?: (selectedUserId: number | undefined) => void;
   onReset: () => void;
   selectedValue: string | null;
+  selectedLabel?: string;
 }
 
 export function DataTableFacetedFilter({
@@ -33,10 +34,8 @@ export function DataTableFacetedFilter({
   onChange,
   onReset,
   selectedValue,
+  selectedLabel,
 }: DataTableFacetedFilterProps) {
-  const selectedLabel = selectedValue
-    ? options.find((item) => item.value === selectedValue)?.label
-    : "";
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -85,7 +84,7 @@ export function DataTableFacetedFilter({
                   <CommandItem
                     key={option.value}
                     onSelect={() => {
-                      if (onChange) onChange(Number(newValue));
+                      if (onChange) onChange(newValue);
                     }}
                   >
                     <div
