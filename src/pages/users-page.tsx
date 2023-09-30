@@ -30,10 +30,6 @@ const columns: ColumnDef<User>[] = [
     ),
   },
   {
-    enableHiding: false,
-    accessorKey: "lastName",
-  },
-  {
     accessorKey: "age",
     header: "Age",
     cell: ({ row }) => <div className="capitalize">{row.getValue("age")}</div>,
