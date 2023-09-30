@@ -90,6 +90,22 @@ export interface Todo {
   userId: number;
 }
 
+export interface GetTodoRes {
+  total: number;
+  limit: number;
+  skip: number;
+  todos: Todo[];
+}
+
+export interface DeleteTodoRes {
+  id: number;
+  todo: string;
+  completed: boolean;
+  userId: number;
+  isDeleted: boolean;
+  deletedOn: string;
+}
+
 export type Option = {
   label: string;
   value: any;

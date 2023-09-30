@@ -1,34 +1,36 @@
-import { CreateTodoBody, UpdateTodoBody } from "../../../types";
+import {
+  CreateTodoBody,
+  DeleteTodoRes,
+  GetList,
+  GetTodoRes,
+  Todo,
+  UpdateTodoBody,
+} from "../../../types";
 import dataProvider from "../../app/data-provider";
-
-interface GetList {
-  limit: string;
-  skip: string;
-}
 
 export const todoProvider = dataProvider.injectEndpoints({
   endpoints: (build) => ({
-    getTodos: build.query<any, GetList>({
+    getTodos: build.query<GetTodoRes, GetList>({
       query: ({ limit, skip }) => `todos?limit=${limit}&skip=${skip}`,
     }),
-    getTodosByUserId: build.query<any, number>({
+    getTodosByUserId: build.query<GetTodoRes, number>({
       query: (userId) => `todos/user/${userId}`,
     }),
-    createTodo: build.mutation<any, CreateTodoBody>({
+    createTodo: build.mutation<Todo, CreateTodoBody>({
       query: (body) => ({
         url: `todos/add`,
         method: "POST",
         body: body,
       }),
     }),
-    updateTodo: build.mutation<any, { todoId: number; body: UpdateTodoBody }>({
+    updateTodo: build.mutation<Todo, { todoId: number; body: UpdateTodoBody }>({
       query: ({ todoId, body }) => ({
         url: `todos/${todoId}`,
         method: "PUT",
         body: body,
       }),
     }),
-    deleteTodo: build.mutation<any, number>({
+    deleteTodo: build.mutation<DeleteTodoRes, number>({
       query: (todoId) => ({
         url: `todos/${todoId}`,
         method: "Delete",
