@@ -5,9 +5,8 @@ import { useUsers } from "../hooks/use-users";
 import { User } from "../types";
 
 const UsersPage = () => {
-  const { users, isLoading } = useUsers();
+  const { users } = useUsers();
 
-  if (isLoading) return <div>Loading..</div>;
   return (
     <div className="py-4 px-10">
       <DataTable data={users} columns={columns} filter={UserFilter} />
