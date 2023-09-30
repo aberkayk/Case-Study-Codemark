@@ -27,7 +27,6 @@ interface InitialState {
   modal: {
     isOpen: boolean;
     todoId: number | null;
-    initialData: Todo | null;
   };
 }
 
@@ -40,7 +39,6 @@ const initialState: EntityState<Todo> & InitialState =
     modal: {
       isOpen: false,
       todoId: null,
-      initialData: null,
     },
   });
 
@@ -51,7 +49,7 @@ const todosSlice = createSlice({
     setDefaultTodos(state) {
       todosAdapter.setMany(state, state.defaultData);
     },
-    toggleTodoHandler(state, action) {
+    toggleTodoModal(state, action) {
       state.modal.isOpen = action.payload;
     },
     setSelectedTodoId(state, action) {
@@ -88,7 +86,7 @@ const todosSlice = createSlice({
 
 export default todosSlice.reducer;
 
-export const { setDefaultTodos, toggleTodoHandler, setSelectedTodoId } =
+export const { setDefaultTodos, toggleTodoModal, setSelectedTodoId } =
   todosSlice.actions;
 
 export const {

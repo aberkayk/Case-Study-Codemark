@@ -11,7 +11,7 @@ import EditTodoButton from "../components/todo/edit-todo-button";
 
 const TodosPage = () => {
   const { todos } = useTodos();
-  console.log({ todos });
+
   return (
     <div className="py-4 px-10">
       <DataTable

@@ -6,7 +6,7 @@ import {
   selectTodoById,
   selectTodoModal,
   setSelectedTodoId,
-  toggleTodoHandler,
+  toggleTodoModal,
 } from "../../redux/features/todo/todo-slice";
 
 const TodoCreate = () => {
@@ -17,8 +17,8 @@ const TodoCreate = () => {
   );
 
   function onClick() {
-    dispatch(setSelectedTodoId(null));
-    dispatch(toggleTodoHandler(true));
+    if (todoModal.todoId) dispatch(setSelectedTodoId(null));
+    dispatch(toggleTodoModal(true));
   }
 
   return (
@@ -29,8 +29,8 @@ const TodoCreate = () => {
       </Button>
       <TodoModal
         isOpen={todoModal.isOpen}
-        onClose={() => dispatch(toggleTodoHandler(false))}
-        onConfirm={() => dispatch(toggleTodoHandler(false))}
+        onClose={() => dispatch(toggleTodoModal(false))}
+        onConfirm={() => dispatch(toggleTodoModal(false))}
         initialData={initialData}
       />
     </>

@@ -18,8 +18,6 @@ export function UserNav() {
   const navigate = useNavigate();
   const user = useSessionUser();
 
-  console.log({ user });
-
   function onLogout() {
     dispatch(logoutHandler());
     navigate("/login");

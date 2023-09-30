@@ -13,7 +13,6 @@ interface Props {
 
 const TodoModal = (props: Props) => {
   const { isOpen, onClose, onConfirm, initialData } = props;
-
   const title = initialData ? "Update Todo" : "Create a Todo";
 
   return (

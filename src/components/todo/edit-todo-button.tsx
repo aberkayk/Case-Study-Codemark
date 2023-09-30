@@ -3,7 +3,7 @@ import { Pencil } from "lucide-react";
 import { useAppDispatch } from "../../redux/app/hooks";
 import {
   setSelectedTodoId,
-  toggleTodoHandler,
+  toggleTodoModal,
 } from "../../redux/features/todo/todo-slice";
 
 interface Props {
@@ -15,7 +15,7 @@ const EditTodoButton = ({ todoId }: Props) => {
 
   function onClick() {
     dispatch(setSelectedTodoId(todoId));
-    dispatch(toggleTodoHandler(true));
+    dispatch(toggleTodoModal(true));
   }
 
   return (

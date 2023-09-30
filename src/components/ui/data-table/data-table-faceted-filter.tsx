@@ -42,30 +42,16 @@ export function DataTableFacetedFilter({
         <Button variant="outline" size="default" className="h-8 border-dashed">
           <PlusCircleIcon className="mr-2 h-4 w-4" />
           {title}
-          {selectedValue && (
+          {selectedLabel && (
             <>
               <Separator orientation="vertical" className="mx-2 h-4" />
-              <div className="hidden space-x-1 lg:flex">
-                {selectedValue ? (
-                  <Badge
-                    variant="secondary"
-                    className="rounded-sm px-1 font-normal"
-                  >
-                    {selectedLabel}
-                  </Badge>
-                ) : (
-                  options
-                    .filter((option) => option.value === selectedValue)
-                    .map((option) => (
-                      <Badge
-                        variant="secondary"
-                        key={option.value}
-                        className="rounded-sm px-1 font-normal"
-                      >
-                        {option.label}
-                      </Badge>
-                    ))
-                )}
+              <div className="flex">
+                <Badge
+                  variant="secondary"
+                  className="rounded-sm px-1 font-normal"
+                >
+                  {selectedLabel}
+                </Badge>
               </div>
             </>
           )}

@@ -33,7 +33,7 @@ interface Props {
 const formSchema = z.object({
   todo: z.string().min(3),
   completed: z.boolean(),
-  userId: z.string().min(1),
+  userId: z.string().min(1, { message: "Required" }),
 });
 
 type TodoFormValues = z.infer<typeof formSchema>;
@@ -126,7 +126,7 @@ const TodoForm = ({ initialData, onCancel, onConfirm }: Props) => {
             <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
               <div className="space-y-0.5">
                 <FormLabel className="text-base">Is Completed</FormLabel>
-                <FormDescription>Todo is completed or not</FormDescription>
+                <FormDescription>Todo is completed!</FormDescription>
               </div>
               <FormControl>
                 <Switch
