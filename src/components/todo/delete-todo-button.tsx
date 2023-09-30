@@ -4,15 +4,18 @@ import AlertModal from "../modals/alert-modal";
 import { Button } from "../ui/button";
 import { toast } from "react-hot-toast";
 import { Trash } from "lucide-react";
+import { Row } from "@tanstack/react-table";
+import { Todo } from "../../types";
 
 interface Props {
-  todoId: number;
+  row: Row<Todo>;
 }
 
-const DeleteTodoButton = ({ todoId }: Props) => {
+const DeleteTodoButton = ({ row }: Props) => {
   const [deleteTodo] = useDeleteTodoMutation();
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const todoId = row.original.id;
 
   function onClick() {
     setOpen(true);
@@ -24,6 +27,7 @@ const DeleteTodoButton = ({ todoId }: Props) => {
       .unwrap()
       .then(() => {
         toast.success("Todo deleted");
+        if (row.getIsSelected()) row.toggleSelected(false);
       })
       .catch((err) => {
         toast.error(err.data.message);

@@ -40,14 +40,18 @@ const columns: ColumnDef<Todo>[] = [
         className="translate-y-[2px]"
       />
     ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value: boolean) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-        className="translate-y-[2px]"
-      />
-    ),
+    cell: (props) => {
+      return (
+        <Checkbox
+          checked={props.row.getIsSelected()}
+          onCheckedChange={(value: boolean) =>
+            props.row.toggleSelected(!!value)
+          }
+          aria-label="Select row"
+          className="translate-y-[2px]"
+        />
+      );
+    },
     enableSorting: false,
     enableHiding: false,
   },
@@ -84,7 +88,7 @@ const columns: ColumnDef<Todo>[] = [
     id: "delete",
     enableHiding: false,
     cell: ({ row }) => {
-      return <DeleteTodoButton todoId={row.original.id} />;
+      return <DeleteTodoButton row={row} />;
     },
   },
 ];
