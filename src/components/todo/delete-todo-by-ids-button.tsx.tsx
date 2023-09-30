@@ -9,14 +9,16 @@ import { useState } from "react";
 import AlertModal from "../modals/alert-modal";
 
 interface Props {
-  ids: number[];
   table: Table<Todo>;
 }
 
-const DeleteTodoByIdsButton = ({ ids, table }: Props) => {
+const DeleteTodoByIdsButton = ({ table }: Props) => {
   const dispatch = useAppDispatch();
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const ids = table.getSelectedRowModel().rows.map((item) => item.original.id);
+
+  if (ids.length === 0) return null;
 
   function onClick() {
     setOpen(true);
