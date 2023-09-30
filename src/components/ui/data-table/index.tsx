@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { Button } from "../button";
 import { DataTableToolbar } from "./data-table-toolbar";
 import {
@@ -26,12 +26,14 @@ interface Props<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   filter: ({ table }: { table: any }) => JSX.Element;
+  create?: () => ReactElement;
 }
 
 export function DataTable<TData, TValue>({
   data,
   columns,
   filter,
+  create,
 }: Props<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -62,8 +64,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="w-full">
-      <DataTableToolbar table={table} filter={filter} />
-
+      <DataTableToolbar table={table} filter={filter} create={create} />
       <div className="rounded-md border">
         <Table>
           <TableHeader>

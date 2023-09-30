@@ -6,13 +6,20 @@ import { DataTable } from "../components/ui/data-table";
 import { useTodos } from "../hooks/use-todos";
 import { Todo } from "../types";
 import TodoFilter from "../components/todo/todo-filter";
+import TodoCreate from "../components/todo/todo-create";
+import EditTodoButton from "../components/todo/edit-todo-button";
 
 const TodosPage = () => {
   const { todos } = useTodos();
-
+  console.log({ todos });
   return (
     <div className="py-4 px-10">
-      <DataTable data={todos} columns={columns} filter={TodoFilter} />
+      <DataTable
+        data={todos}
+        columns={columns}
+        filter={TodoFilter}
+        create={TodoCreate}
+      />
     </div>
   );
 };
@@ -41,7 +48,14 @@ const columns: ColumnDef<Todo>[] = [
     },
   },
   {
-    id: "actions",
+    id: "edit",
+    enableHiding: false,
+    cell: ({ row }) => {
+      return <EditTodoButton todoId={row.original.id} />;
+    },
+  },
+  {
+    id: "delete",
     enableHiding: false,
     cell: ({ row }) => {
       return <DeleteTodoButton todoId={row.original.id} />;

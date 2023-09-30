@@ -21,11 +21,12 @@ const DeleteTodoButton = ({ todoId }: Props) => {
   const onConfirm = () => {
     setLoading(true);
     deleteTodo(todoId)
+      .unwrap()
       .then(() => {
         toast.success("Todo deleted");
       })
-      .catch(() => {
-        toast.error(`Opps.. Something went wrong!`);
+      .catch((err) => {
+        toast.error(err.data.message);
       })
       .finally(() => {
         setOpen(false);

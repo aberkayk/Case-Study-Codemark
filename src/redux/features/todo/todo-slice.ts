@@ -7,6 +7,7 @@ import {
   EntityState,
 } from "@reduxjs/toolkit";
 import {
+  createTodo,
   deleteTodo,
   getTodos,
   getTodosByUserId,
@@ -15,7 +16,7 @@ import {
 
 const todosAdapter = createEntityAdapter<Todo>({
   selectId: (todo) => todo.id,
-  sortComparer: (a, b) => b.todo.localeCompare(a.todo),
+  sortComparer: (a, b) => b.id - a.id,
 });
 
 interface InitialState {
@@ -23,6 +24,11 @@ interface InitialState {
   limit: number;
   skip: number;
   total: number;
+  modal: {
+    isOpen: boolean;
+    todoId: number | null;
+    initialData: Todo | null;
+  };
 }
 
 const initialState: EntityState<Todo> & InitialState =
@@ -31,6 +37,11 @@ const initialState: EntityState<Todo> & InitialState =
     limit: 0,
     skip: 0,
     total: 0,
+    modal: {
+      isOpen: false,
+      todoId: null,
+      initialData: null,
+    },
   });
 
 const todosSlice = createSlice({
@@ -39,6 +50,12 @@ const todosSlice = createSlice({
   reducers: {
     setDefaultTodos(state) {
       todosAdapter.setMany(state, state.defaultData);
+    },
+    toggleTodoHandler(state, action) {
+      state.modal.isOpen = action.payload;
+    },
+    setSelectedTodoId(state, action) {
+      state.modal.todoId = action.payload;
     },
   },
   extraReducers(builder) {
@@ -49,6 +66,9 @@ const todosSlice = createSlice({
       state.limit = limit;
       state.skip = skip;
       state.total = total;
+    });
+    builder.addMatcher(createTodo.matchFulfilled, (state, action) => {
+      todosAdapter.addOne(state, action.payload);
     });
     builder.addMatcher(updateTodo.matchFulfilled, (state, action) => {
       todosAdapter.upsertOne(state, action.payload);
@@ -68,7 +88,8 @@ const todosSlice = createSlice({
 
 export default todosSlice.reducer;
 
-export const { setDefaultTodos } = todosSlice.actions;
+export const { setDefaultTodos, toggleTodoHandler, setSelectedTodoId } =
+  todosSlice.actions;
 
 export const {
   selectAll: selectAllTodos,
@@ -81,4 +102,4 @@ export const selectTodosByUserId = createSelector(
   (todos, userId) => todos.filter((todo) => todo.userId === userId)
 );
 
-export const selectAllTodoOwners = (state: RootState) => state.todos.entities;
+export const selectTodoModal = (state: RootState) => state.todos.modal;

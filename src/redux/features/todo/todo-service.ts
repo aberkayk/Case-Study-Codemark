@@ -1,12 +1,9 @@
+import { CreateTodoBody, UpdateTodoBody } from "../../../types";
 import dataProvider from "../../app/data-provider";
 
 interface GetList {
   limit: string;
   skip: string;
-}
-
-interface UpdateBody {
-  completed: boolean;
 }
 
 export const todoProvider = dataProvider.injectEndpoints({
@@ -17,7 +14,14 @@ export const todoProvider = dataProvider.injectEndpoints({
     getTodosByUserId: build.query<any, number>({
       query: (userId) => `todos/user/${userId}`,
     }),
-    updateTodo: build.mutation<any, { todoId: number; body: UpdateBody }>({
+    createTodo: build.mutation<any, CreateTodoBody>({
+      query: (body) => ({
+        url: `todos/add`,
+        method: "POST",
+        body: body,
+      }),
+    }),
+    updateTodo: build.mutation<any, { todoId: number; body: UpdateTodoBody }>({
       query: ({ todoId, body }) => ({
         url: `todos/${todoId}`,
         method: "PUT",
@@ -37,10 +41,11 @@ export const todoProvider = dataProvider.injectEndpoints({
 export const {
   useGetTodosQuery,
   useGetTodosByUserIdQuery,
+  useCreateTodoMutation,
   useUpdateTodoMutation,
   useDeleteTodoMutation,
 } = todoProvider;
 
 export const {
-  endpoints: { getTodos, getTodosByUserId, updateTodo, deleteTodo },
+  endpoints: { getTodos, getTodosByUserId, createTodo, updateTodo, deleteTodo },
 } = todoProvider;

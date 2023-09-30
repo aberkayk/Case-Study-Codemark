@@ -105,3 +105,12 @@ export interface DataTableFilterableColumn<TData>
   extends DataTableSearchableColumn<TData> {
   options: Option[];
 }
+
+export interface CreateTodoBody {
+  todo: string;
+  completed: boolean;
+  userId: number;
+}
+export interface UpdateTodoBody {
+  completed: boolean;
+}

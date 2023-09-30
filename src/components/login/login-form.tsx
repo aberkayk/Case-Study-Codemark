@@ -84,7 +84,7 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
             {isLoading ? (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
             ) : (
-              "Log in with Username"
+              "Log in with username"
             )}
           </Button>
         </div>

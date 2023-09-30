@@ -1,6 +1,7 @@
 import { useUpdateTodoMutation } from "../../redux/features/todo/todo-service";
 import { Button } from "../ui/button";
 import { CheckCircle, XCircle } from "lucide-react";
+import { toast } from "react-hot-toast";
 
 interface Props {
   todoId: number;
@@ -12,8 +13,13 @@ const TodoCompletedField = ({ isCompleted, todoId }: Props) => {
 
   function onClick() {
     updateTodo({ todoId, body: { completed: !isCompleted } })
-      .then(() => {})
-      .catch((err) => {});
+      .unwrap()
+      .then(() =>
+        toast.success(`Todo is ${!isCompleted ? "completed" : "not completed"}`)
+      )
+      .catch((err) => {
+        toast.error(err.data.message);
+      });
   }
 
   return (

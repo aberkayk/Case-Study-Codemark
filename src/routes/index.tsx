@@ -7,8 +7,8 @@ import UsersPage from "../pages/users-page";
 import ProtectedRoute from "./protected-route";
 
 export const routes = [
-  { path: "/todos", label: "Todos" },
   { path: "/users", label: "Users" },
+  { path: "/todos", label: "Todos" },
 ];
 
 export const router = createBrowserRouter([
