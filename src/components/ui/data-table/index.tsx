@@ -27,6 +27,7 @@ interface Props<TData, TValue> {
   data: TData[];
   filter: ({ table }: { table: any }) => JSX.Element;
   create?: () => ReactElement;
+  actions?: ({ table }: { table: any }) => JSX.Element;
 }
 
 export function DataTable<TData, TValue>({
@@ -34,6 +35,7 @@ export function DataTable<TData, TValue>({
   columns,
   filter,
   create,
+  actions,
 }: Props<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -64,7 +66,12 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="w-full">
-      <DataTableToolbar table={table} filter={filter} create={create} />
+      <DataTableToolbar
+        table={table}
+        filter={filter}
+        create={create}
+        actions={actions}
+      />
       <div className="rounded-md border">
         <Table>
           <TableHeader>

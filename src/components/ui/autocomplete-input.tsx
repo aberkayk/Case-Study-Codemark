@@ -62,7 +62,7 @@ const AutocompleteInput = ({
       {!disabled && (
         <Command>
           <CommandList style={{ height: disabledPopover ? 200 : "auto" }}>
-            <CommandInput placeholder={`${name} ara...`} />
+            <CommandInput placeholder={`Search ${name}...`} />
             <CommandEmpty> {name} bulunamadı.</CommandEmpty>
             {options.map((option) => (
               <CommandItem

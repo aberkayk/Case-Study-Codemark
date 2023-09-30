@@ -8,6 +8,8 @@ import { Todo } from "../types";
 import TodoFilter from "../components/todo/todo-filter";
 import TodoCreate from "../components/todo/todo-create";
 import EditTodoButton from "../components/todo/edit-todo-button";
+import { Checkbox } from "../components/ui/checkbox";
+import TodoActions from "../components/todo/todo-actions";
 
 const TodosPage = () => {
   const { todos } = useTodos();
@@ -19,12 +21,36 @@ const TodosPage = () => {
         columns={columns}
         filter={TodoFilter}
         create={TodoCreate}
+        actions={TodoActions}
       />
     </div>
   );
 };
 
 const columns: ColumnDef<Todo>[] = [
+  {
+    id: "select",
+    header: ({ table }) => (
+      <Checkbox
+        checked={table.getIsAllPageRowsSelected()}
+        onCheckedChange={(value: boolean) =>
+          table.toggleAllPageRowsSelected(!!value)
+        }
+        aria-label="Select all"
+        className="translate-y-[2px]"
+      />
+    ),
+    cell: ({ row }) => (
+      <Checkbox
+        checked={row.getIsSelected()}
+        onCheckedChange={(value: boolean) => row.toggleSelected(!!value)}
+        aria-label="Select row"
+        className="translate-y-[2px]"
+      />
+    ),
+    enableSorting: false,
+    enableHiding: false,
+  },
   {
     accessorKey: "todo",
     header: "Todo",
