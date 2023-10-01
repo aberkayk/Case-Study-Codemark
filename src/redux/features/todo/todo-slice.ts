@@ -55,6 +55,9 @@ const todosSlice = createSlice({
     setSelectedTodoId(state, action) {
       state.modal.todoId = action.payload;
     },
+    setTodo(state, action) {
+      todosAdapter.upsertOne(state, action.payload);
+    },
   },
   extraReducers(builder) {
     builder.addMatcher(getTodos.matchFulfilled, (state, action) => {
@@ -86,7 +89,7 @@ const todosSlice = createSlice({
 
 export default todosSlice.reducer;
 
-export const { setDefaultTodos, toggleTodoModal, setSelectedTodoId } =
+export const { setDefaultTodos, toggleTodoModal, setSelectedTodoId, setTodo } =
   todosSlice.actions;
 
 export const {

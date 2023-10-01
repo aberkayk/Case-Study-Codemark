@@ -92,7 +92,7 @@ const TodoForm = ({ initialData, onCancel, onConfirm }: Props) => {
   const onSubmit = async (data: TodoFormValues) => {
     try {
       setLoading(true);
-      if (initialData) {
+      if (isEdit) {
         updateHandler(initialData.id, data);
       } else {
         createHandler(data);

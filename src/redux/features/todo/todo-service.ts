@@ -7,6 +7,7 @@ import {
   UpdateTodoBody,
 } from "../../../types";
 import dataProvider from "../../app/data-provider";
+import { setTodo } from "./todo-slice";
 
 export const todoProvider = dataProvider.injectEndpoints({
   endpoints: (build) => ({
@@ -30,6 +31,24 @@ export const todoProvider = dataProvider.injectEndpoints({
         body: body,
       }),
     }),
+    optimisticUpdateTodo: build.mutation<
+      void,
+      Pick<Todo, "id"> & Partial<Todo>
+    >({
+      query: ({ id, ...patch }) => ({
+        url: `todos/${id}`,
+        method: "PUT",
+        body: patch,
+      }),
+      async onQueryStarted({ id, ...patch }, { dispatch, queryFulfilled }) {
+        dispatch(setTodo({ id, ...patch }));
+        try {
+          await queryFulfilled;
+        } catch {
+          dispatch(setTodo({ id, completed: !patch.completed }));
+        }
+      },
+    }),
     deleteTodo: build.mutation<DeleteTodoRes, number>({
       query: (todoId) => ({
         url: `todos/${todoId}`,
@@ -45,6 +64,7 @@ export const {
   useGetTodosByUserIdQuery,
   useCreateTodoMutation,
   useUpdateTodoMutation,
+  useOptimisticUpdateTodoMutation,
   useDeleteTodoMutation,
 } = todoProvider;
 

@@ -1,4 +1,4 @@
-import { useUpdateTodoMutation } from "../../redux/features/todo/todo-service";
+import { useOptimisticUpdateTodoMutation } from "../../redux/features/todo/todo-service";
 import { Button } from "../ui/button";
 import { CheckCircle, XCircle } from "lucide-react";
 import { toast } from "react-hot-toast";
@@ -9,10 +9,10 @@ interface Props {
 }
 
 const TodoCompletedField = ({ isCompleted, todoId }: Props) => {
-  const [updateTodo] = useUpdateTodoMutation();
+  const [optimisticUpdateTodo] = useOptimisticUpdateTodoMutation();
 
   function onClick() {
-    updateTodo({ todoId, body: { completed: !isCompleted } })
+    optimisticUpdateTodo({ id: todoId, completed: !isCompleted })
       .unwrap()
       .then(() =>
         toast.success(`Todo is ${!isCompleted ? "completed" : "not completed"}`)
