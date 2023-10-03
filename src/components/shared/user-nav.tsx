@@ -1,7 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { useSessionUser } from "../../hooks/use-session-user";
-import { useAppDispatch } from "../../redux/app/hooks";
-import { logoutHandler } from "../../redux/features/auth/auth-slice";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Button } from "../ui/button";
 import {
@@ -14,12 +12,10 @@ import {
 } from "../ui/dropdown-menu";
 
 export function UserNav() {
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const user = useSessionUser();
 
   function onLogout() {
-    dispatch(logoutHandler());
     navigate("/login");
   }
   return (

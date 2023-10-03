@@ -17,13 +17,13 @@ export default function NotFoundPage() {
               to="/users"
               className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
-              Go back users page
+              Go back to users page
             </Link>
             <Link
               to="/todos"
               className="text-sm font-semibold text-gray-900 dark:text-gray-200"
             >
-              Go back todos page
+              Go back to todos page
             </Link>
           </div>
         </div>

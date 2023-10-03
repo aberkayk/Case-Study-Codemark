@@ -100,59 +100,6 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
           </Button>
         </form>
       </Form>
-      {/* <form onSubmit={onSubmit}>
-        <div className="grid gap-2">
-          <div className="grid gap-1">
-            <Label className="sr-only" htmlFor="username">
-              Username
-            </Label>
-            <Input
-              value={loginState.username}
-              onChange={(event) =>
-                setLoginState((prev) => ({
-                  ...prev,
-                  username: event.target.value,
-                }))
-              }
-              id="username"
-              placeholder="name@example.com"
-              type="text"
-              autoCapitalize="none"
-              autoComplete="text"
-              autoCorrect="off"
-              disabled={isLoading}
-            />
-          </div>
-          <div className="grid gap-1">
-            <Label className="sr-only" htmlFor="password">
-              Password
-            </Label>
-            <Input
-              value={loginState.password}
-              onChange={(event) =>
-                setLoginState((prev) => ({
-                  ...prev,
-                  password: event.target.value,
-                }))
-              }
-              id="password"
-              placeholder="name@example.com"
-              type="password"
-              autoCapitalize="none"
-              autoComplete="password"
-              autoCorrect="off"
-              disabled={isLoading}
-            />
-          </div>
-          <Button disabled={isLoading}>
-            {isLoading ? (
-              <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-            ) : (
-              "Log in with username"
-            )}
-          </Button>
-        </div>
-      </form> */}
     </div>
   );
 }

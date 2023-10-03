@@ -1,7 +1,7 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { LoginRes } from "../../../types";
 import { RootState } from "../../app/store";
-import { login } from "./auth-service";
+import { login, logout } from "./auth-service";
 
 export interface AuthState {
   token: string;
@@ -16,22 +16,20 @@ const initialState: AuthState = {
 export const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {
-    logoutHandler: (state) => {
-      state.token = "";
-      state.user = undefined;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addMatcher(login.matchFulfilled, (state, { payload }) => {
       state.token = payload.token;
       state.user = payload;
     });
+    builder.addMatcher(logout.matchFulfilled, (state) => {
+      state.token = "";
+      state.user = undefined;
+    });
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { logoutHandler } = authSlice.actions;
 
 export const selectIsAuth = (state: RootState) => Boolean(state.auth.token);
 export const selectToken = (state: RootState) => state.auth.token;
