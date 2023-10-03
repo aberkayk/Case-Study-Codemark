@@ -95,7 +95,7 @@ export interface Post {
   title: string;
   body: string;
   userId: number;
-  tags: "history" | "american" | "crime";
+  tags: string[];
   reactions: number;
 }
 
