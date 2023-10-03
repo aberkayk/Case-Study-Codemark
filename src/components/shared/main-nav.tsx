@@ -13,8 +13,9 @@ export function MainNav({
       className={cn("flex items-center space-x-4 lg:space-x-6", className)}
       {...props}
     >
-      {routes.map((route) => (
+      {routes.map((route, index) => (
         <Link
+          key={index}
           to={route.path}
           className={cn(
             "text-sm font-medium transition-colors hover:text-primary",
