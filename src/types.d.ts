@@ -83,6 +83,22 @@ export interface GetUsersRes {
   users: User[];
 }
 
+export interface GetPostsRes {
+  total: number;
+  limit: number;
+  skip: number;
+  posts: Post[];
+}
+
+export interface Post {
+  id: number;
+  title: string;
+  body: string;
+  userId: number;
+  tags: "history" | "american" | "crime";
+  reactions: number;
+}
+
 export interface Todo {
   id: number;
   todo: string;

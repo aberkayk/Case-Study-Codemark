@@ -5,6 +5,7 @@ import authSlice from "../features/auth/auth-slice";
 import todoSlice from "../features/todo/todo-slice";
 import userSlice from "../features/user/user-slice";
 import dataProvider from "./data-provider";
+import postSlice from "../features/post/post-slice";
 
 const persistConfig = {
   key: "root",
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   users: userSlice,
   todos: todoSlice,
+  posts: postSlice,
 });
 
 export const store = configureStore({

@@ -5,10 +5,12 @@ import LoginPage from "../pages/login-page";
 import TodosPage from "../pages/todos-page";
 import UsersPage from "../pages/users-page";
 import ProtectedRoute from "./protected-route";
+import PostsPage from "../pages/posts-page";
 
 export const routes = [
   { path: "/users", label: "Users" },
   { path: "/todos", label: "Todos" },
+  { path: "/posts", label: "Posts" },
 ];
 
 export const router = createBrowserRouter([
@@ -36,6 +38,10 @@ export const router = createBrowserRouter([
           {
             path: "todos",
             element: <TodosPage />,
+          },
+          {
+            path: "posts",
+            element: <PostsPage />,
           },
         ],
       },
