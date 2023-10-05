@@ -4,11 +4,10 @@ import { DataTable } from "../components/ui/data-table";
 import { usePosts } from "../hooks/use-posts";
 import { Post } from "../types";
 import PostFilter from "../components/post/post-filter";
+import EditPostButton from "../components/post/edit-post-button";
 
 const PostsPage = () => {
   const { posts } = usePosts();
-
-  console.log(posts);
 
   return (
     <div className="py-4 px-10">
@@ -46,6 +45,13 @@ const columns: ColumnDef<Post>[] = [
           : row.original.tags}
       </div>
     ),
+  },
+  {
+    id: "edit",
+    enableHiding: false,
+    cell: ({ row }) => {
+      return <EditPostButton postId={row.original.id} />;
+    },
   },
 ];
 

@@ -1,4 +1,11 @@
-import { GetList, GetPostsRes, Post } from "../../../types";
+import { number } from "zod";
+import {
+  CreatePostBody,
+  GetList,
+  GetPostsRes,
+  Post,
+  UpdatePostBody,
+} from "../../../types";
 import dataProvider from "../../app/data-provider";
 
 export const postProvider = dataProvider.injectEndpoints({
@@ -6,15 +13,33 @@ export const postProvider = dataProvider.injectEndpoints({
     getPosts: build.query<GetPostsRes, GetList>({
       query: ({ limit, skip }) => `posts?limit=${limit}&skip=${skip}`,
     }),
-    getPostByUserId: build.query<Post, number>({
+    getPostsByUserId: build.query<Post, number>({
       query: (id) => `posts/${id}`,
+    }),
+    createPost: build.mutation<Post, CreatePostBody>({
+      query: (body) => ({
+        url: `posts/add`,
+        method: "POST",
+        body: body,
+      }),
+    }),
+    updatePost: build.mutation<Post, { postId: number; body: UpdatePostBody }>({
+      query: ({ postId, body }) => ({
+        url: `posts/${postId}`,
+        method: "PUT",
+        body: body,
+      }),
     }),
   }),
 });
 
 // Export hooks for usage in functional components
-export const { useGetPostsQuery } = postProvider;
+export const {
+  useGetPostsQuery,
+  useCreatePostMutation,
+  useUpdatePostMutation,
+} = postProvider;
 
 export const {
-  endpoints: { getPosts },
+  endpoints: { getPosts, createPost, updatePost, getPostsByUserId },
 } = postProvider;

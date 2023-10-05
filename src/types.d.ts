@@ -143,6 +143,17 @@ export interface CreateTodoBody {
   completed: boolean;
   userId: number;
 }
+
+export interface CreatePostBody {
+  post: string;
+  completed: boolean;
+  userId: number;
+}
+
 export interface UpdateTodoBody {
+  completed: boolean;
+}
+
+export interface UpdatePostBody {
   completed: boolean;
 }

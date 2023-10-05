@@ -31,7 +31,7 @@ const PostFilter = ({ table }: Props) => {
   const onUserChange = (selectedUserId: number | undefined) => {
     if (selectedUserId && Number(userId) !== selectedUserId) {
       navigate({
-        pathname: "/todos",
+        pathname: "/posts",
         search: `?userId=${selectedUserId}`,
       });
     } else onReset();
@@ -39,11 +39,11 @@ const PostFilter = ({ table }: Props) => {
 
   return (
     <>
-      {/* <Input
+      <Input
         placeholder="Filter post..."
-        value={(table.getColumn("post")?.getFilterValue() as string) ?? ""}
+        value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
         onChange={(event) =>
-          table.getColumn("post")?.setFilterValue(event.target.value)
+          table.getColumn("title")?.setFilterValue(event.target.value)
         }
         className="h-8 w-[150px] lg:w-[250px]"
       />
@@ -61,36 +61,12 @@ const PostFilter = ({ table }: Props) => {
           }
         />
       )}
-      {table.getColumn("completed") && (
-        <DataTableFacetedFilter
-          title="Is Completed"
-          options={completeOptions}
-          onChange={(value: any) => {
-            table.getColumn("completed")?.setFilterValue(value);
-          }}
-          selectedValue={
-            table.getColumn("completed")?.getFilterValue() as string
-          }
-          selectedLabel={
-            table.getColumn("completed")?.getFilterValue()
-              ? completeOptions.find(
-                  (item) =>
-                    item.value ===
-                    table.getColumn("completed")?.getFilterValue()
-                )?.label
-              : ""
-          }
-          onReset={() =>
-            table.getColumn("completed")?.setFilterValue(undefined)
-          }
-        />
-      )}
       {isFiltered && (
         <Button variant="ghost" onClick={onReset} className="h-8 px-2 lg:px-3">
           Reset
           <XIcon className="ml-2 h-4 w-4" />
         </Button>
-      )} */}
+      )}
     </>
   );
 };
