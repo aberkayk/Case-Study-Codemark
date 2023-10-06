@@ -48,6 +48,8 @@ const postsSlice = createSlice({
       postsAdapter.setMany(state, state.defaultData);
     },
     togglePostModal(state, action) {
+      console.log(state);
+
       state.modal.isOpen = action.payload;
     },
     setSelectedPostId(state, action) {
@@ -96,3 +98,5 @@ export const {
 //   [selecAllPosts, (state, userId) => userId],
 //   (users, userId) => users.filter((user) => user.id === userId)
 // );
+
+export const selectPostModal = (state: RootState) => state.posts.modal;
