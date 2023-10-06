@@ -9,6 +9,8 @@ import { DataTableFacetedFilter } from "../ui/data-table/data-table-faceted-filt
 import { Input } from "../ui/input";
 import { usePosts } from "../../hooks/use-posts";
 import { setDefaultPosts } from "../../redux/features/post/post-slice";
+import { DataTableListFilter } from "../ui/data-table/data-table-list-filter";
+import { tagsOptions } from "../../constants/data";
 
 interface Props {
   table: Table<Post>;
@@ -57,6 +59,13 @@ const PostFilter = ({ table }: Props) => {
               ? userOptions.find((item) => item.value === userId)?.label
               : ""
           }
+        />
+      )}
+      {table.getColumn("tags") && (
+        <DataTableListFilter
+          column={table.getColumn("tags")}
+          title="Tag"
+          options={tagsOptions}
         />
       )}
       {isFiltered && (

@@ -57,6 +57,7 @@ const columns: ColumnDef<Post>[] = [
   {
     accessorKey: "tags",
     header: "Tags",
+
     cell: ({ row }: { row: Row<Post> }) => (
       <div>
         {Array.isArray(row.original.tags)
