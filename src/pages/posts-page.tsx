@@ -5,13 +5,32 @@ import { usePosts } from "../hooks/use-posts";
 import { Post } from "../types";
 import PostFilter from "../components/post/post-filter";
 import EditPostButton from "../components/post/edit-post-button";
+import PostModal from "../components/post/post-modal";
+import {
+  selectPostById,
+  selectPostModal,
+  togglePostModal,
+} from "../redux/features/post/post-slice";
+import { useAppDispatch, useAppSelector } from "../redux/app/hooks";
+import CreatePostButton from "../components/post/create-post-button";
 
 const PostsPage = () => {
   const { posts } = usePosts();
+  const dispatch = useAppDispatch();
+  const postModal = useAppSelector(selectPostModal);
+
+  const initialData = useAppSelector((state) =>
+    selectPostById(state, postModal.postId as number)
+  );
 
   return (
     <div className="py-4 px-10">
-      <DataTable data={posts} columns={columns} filter={PostFilter} />
+      <DataTable
+        create={CreatePostButton}
+        data={posts}
+        columns={columns}
+        filter={PostFilter}
+      />
     </div>
   );
 };
@@ -23,6 +42,11 @@ const columns: ColumnDef<Post>[] = [
     cell: ({ row }) => (
       <div className="capitalize">{row.getValue("title")}</div>
     ),
+  },
+  {
+    accessorKey: "body",
+    header: "Body",
+    cell: ({ row }) => <div>{row.getValue("body")}</div>,
   },
   {
     accessorKey: "userId",

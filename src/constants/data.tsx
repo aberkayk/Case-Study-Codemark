@@ -12,3 +12,38 @@ export const completeOptions = [
     icon: XCircle,
   },
 ];
+
+export const tagsOptions = [
+  {
+    value: "fiction",
+    label: "Fiction",
+  },
+  {
+    value: "mystery",
+    label: "Mystery",
+  },
+  {
+    value: "novel",
+    label: "Novel",
+  },
+  {
+    value: "love",
+    label: "Love",
+  },
+  {
+    value: "magical",
+    label: "Magical",
+  },
+  {
+    value: "french",
+    label: "French",
+  },
+  {
+    value: "crime",
+    label: "Crime",
+  },
+  {
+    value: "classic",
+    label: "Classic",
+  },
+];

@@ -68,6 +68,7 @@ const postsSlice = createSlice({
       state.total = total;
     });
     builder.addMatcher(createPost.matchFulfilled, (state, action) => {
+      action.payload.body = "Ahmet test body";
       postsAdapter.addOne(state, action.payload);
     });
     builder.addMatcher(updatePost.matchFulfilled, (state, action) => {

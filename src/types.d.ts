@@ -145,8 +145,7 @@ export interface CreateTodoBody {
 }
 
 export interface CreatePostBody {
-  post: string;
-  completed: boolean;
+  title: string;
   userId: number;
 }
 
@@ -155,5 +154,5 @@ export interface UpdateTodoBody {
 }
 
 export interface UpdatePostBody {
-  completed: boolean;
+  title: string;
 }

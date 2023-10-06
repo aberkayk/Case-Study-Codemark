@@ -23,6 +23,9 @@ import {
   useCreatePostMutation,
   useUpdatePostMutation,
 } from "../../redux/features/post/post-service";
+import { Input } from "../ui/input";
+import MultiAutocompleteInput from "../ui/multi-autocomplete-input";
+import { tagsOptions } from "../../constants/data";
 
 interface Props {
   initialData?: Post | undefined;
@@ -31,8 +34,9 @@ interface Props {
 }
 
 const formSchema = z.object({
-  post: z.string().min(3),
-  completed: z.boolean(),
+  title: z.string().min(3),
+  body: z.string().min(10),
+  tags: z.string().array(),
   userId: z.string().min(1, { message: "Required" }),
 });
 
@@ -54,8 +58,9 @@ const PostForm = ({ initialData, onCancel, onConfirm }: Props) => {
         userId: initialData?.userId.toString(),
       }
     : {
-        post: "",
-        completed: false,
+        title: "",
+        body: "",
+        tags: [],
         userId: user.id?.toString(),
       };
 
@@ -65,7 +70,7 @@ const PostForm = ({ initialData, onCancel, onConfirm }: Props) => {
   });
 
   const createHandler = (data: PostFormValues) => {
-    createPost({ ...data, userId: Number(data.userId) })
+    createPost({ title: data.title, userId: Number(data.userId) })
       .unwrap()
       .then(() => {
         toast.success(toastMessage);
@@ -78,7 +83,7 @@ const PostForm = ({ initialData, onCancel, onConfirm }: Props) => {
   const updateHandler = (postId: number, data: PostFormValues) => {
     updatePost({
       postId: postId,
-      body: { completed: data.completed },
+      body: { title: data.title },
     })
       .unwrap()
       .then(() => {
@@ -108,10 +113,23 @@ const PostForm = ({ initialData, onCancel, onConfirm }: Props) => {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full">
         <FormField
           control={form.control}
-          name="post"
+          name="title"
           render={({ field }) => (
             <FormItem className="grid mt-2">
-              <FormLabel>Post</FormLabel>
+              <FormLabel>Title</FormLabel>
+              <FormControl>
+                <Input {...field} disabled={loading} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="body"
+          render={({ field }) => (
+            <FormItem className="grid mt-2">
+              <FormLabel>Body</FormLabel>
               <FormControl>
                 <Textarea {...field} disabled={loading || isEdit} />
               </FormControl>
@@ -121,17 +139,19 @@ const PostForm = ({ initialData, onCancel, onConfirm }: Props) => {
         />
         <FormField
           control={form.control}
-          name="completed"
+          name="tags"
           render={({ field }) => (
-            <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-              <div className="space-y-0.5">
-                <FormLabel className="text-base">Is Completed</FormLabel>
-                <FormDescription>Post is completed!</FormDescription>
-              </div>
+            <FormItem className="grid mt-2">
+              <FormLabel>Tags</FormLabel>
               <FormControl>
-                <Switch
-                  checked={field.value}
-                  onCheckedChange={field.onChange}
+                <MultiAutocompleteInput
+                  selectedItems={field.value}
+                  onValueChange={field.onChange}
+                  name="Tags"
+                  options={tagsOptions}
+                  disabled={loading || isEdit}
+                  disabledPopover
+                  maxLength={2}
                 />
               </FormControl>
               <FormMessage />
