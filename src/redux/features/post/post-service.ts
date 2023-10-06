@@ -13,8 +13,8 @@ export const postProvider = dataProvider.injectEndpoints({
     getPosts: build.query<GetPostsRes, GetList>({
       query: ({ limit, skip }) => `posts?limit=${limit}&skip=${skip}`,
     }),
-    getPostsByUserId: build.query<Post, number>({
-      query: (id) => `posts/${id}`,
+    getPostsByUserId: build.query<GetPostsRes, number>({
+      query: (id) => `posts/user/${id}`,
     }),
     createPost: build.mutation<Post, CreatePostBody>({
       query: (body) => ({
@@ -36,6 +36,7 @@ export const postProvider = dataProvider.injectEndpoints({
 // Export hooks for usage in functional components
 export const {
   useGetPostsQuery,
+  useGetPostsByUserIdQuery,
   useCreatePostMutation,
   useUpdatePostMutation,
 } = postProvider;

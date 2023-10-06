@@ -63,6 +63,7 @@ const postsSlice = createSlice({
     builder.addMatcher(getPosts.matchFulfilled, (state, action) => {
       const { limit, posts, total, skip } = action.payload;
       postsAdapter.setMany(state, posts);
+      state.defaultData = posts;
       state.limit = limit;
       state.skip = skip;
       state.total = total;
@@ -74,13 +75,13 @@ const postsSlice = createSlice({
     builder.addMatcher(updatePost.matchFulfilled, (state, action) => {
       postsAdapter.upsertOne(state, action.payload);
     });
-    // builder.addMatcher(getPostsByUserId.matchFulfilled, (state, action) => {
-    //   const { limit, posts, total, skip } = action.payload;
-    //   postsAdapter.setAll(state, posts);
-    //   state.limit = limit;
-    //   state.skip = skip;
-    //   state.total = total;
-    // });
+    builder.addMatcher(getPostsByUserId.matchFulfilled, (state, action) => {
+      const { limit, posts, total, skip } = action.payload;
+      postsAdapter.setAll(state, posts);
+      state.limit = limit;
+      state.skip = skip;
+      state.total = total;
+    });
   },
 });
 

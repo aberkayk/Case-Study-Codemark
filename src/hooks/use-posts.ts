@@ -1,7 +1,10 @@
 import { useSearchParams } from "react-router-dom";
 import { useAppSelector } from "../redux/app/hooks";
 import { selecAllPosts } from "../redux/features/post/post-slice";
-import { useGetPostsQuery } from "../redux/features/post/post-service";
+import {
+  useGetPostsByUserIdQuery,
+  useGetPostsQuery,
+} from "../redux/features/post/post-service";
 
 export const usePosts = () => {
   const [searchParams] = useSearchParams();
@@ -15,9 +18,17 @@ export const usePosts = () => {
     { skip: Boolean(userId) }
   );
 
+  const { isLoading: isPostByUserFetching } = useGetPostsByUserIdQuery(
+    Number(userId),
+    {
+      skip: !Boolean(userId),
+      refetchOnMountOrArgChange: true,
+    }
+  );
+
   return {
     posts,
-    isLoading: isPostsFetching,
+    isLoading: isPostsFetching || isPostByUserFetching,
     isFiltered,
     userId,
   };

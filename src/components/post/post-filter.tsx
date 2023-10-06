@@ -1,19 +1,17 @@
 import { Table } from "@tanstack/react-table";
 import { XIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { completeOptions } from "../../constants/data";
-import { useTodos } from "../../hooks/use-todos";
 import { useUsers } from "../../hooks/use-users";
 import { useAppDispatch } from "../../redux/app/hooks";
-import { setDefaultTodos } from "../../redux/features/todo/todo-slice";
-import { Todo } from "../../types";
+import { Post } from "../../types";
 import { Button } from "../ui/button";
 import { DataTableFacetedFilter } from "../ui/data-table/data-table-faceted-filter";
 import { Input } from "../ui/input";
 import { usePosts } from "../../hooks/use-posts";
+import { setDefaultPosts } from "../../redux/features/post/post-slice";
 
 interface Props {
-  table: Table<Todo>;
+  table: Table<Post>;
 }
 
 const PostFilter = ({ table }: Props) => {
@@ -23,7 +21,7 @@ const PostFilter = ({ table }: Props) => {
   const { userId, isFiltered } = usePosts();
 
   const onReset = () => {
-    dispatch(setDefaultTodos());
+    dispatch(setDefaultPosts());
     table.resetColumnFilters();
     navigate("/posts");
   };
